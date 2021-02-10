@@ -1,0 +1,165 @@
+<div class="card list-employee">
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Sobrenome</th>
+          <th scope="col">E-mail</th>
+          <th scope="col">Telefone</th>
+          <th scope="col">Contratado</th>
+          <th scope="col">Salário</th>
+          <th scope="col">Com.%</th>
+          <th scope="col">ID.Ger.</th>
+          <th scope="col">Dep.</th>
+          <th scope="col">Função</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employees">
+          <td>{{employee.employee_id}}</td>
+          <td>{{employee.first_name}}</td>
+          <td>{{employee.last_name}}</td>
+          <td>{{employee.email}}</td>
+          <td>{{employee.phone_number}}</td>
+          <td>{{employee.hire_date}}</td>
+          <td>{{employee.salary}}</td>
+          <td>{{employee.commission_pct}}</td>
+          <td>{{employee.manager_id}}</td>
+          <td>{{employee.department_id}}</td>
+          <td>{{employee.job_id}}</td>
+          <td>
+            <div class="actions-btn">
+              <button type="button" class="btn btn-warning btn-sm"
+              (click)="editEmployee(employee)"><mat-icon>edit</mat-icon></button>
+              <button type="button" class="btn btn-danger btn-sm ml-1"
+              (click)="deleteEmployee(employee)"><mat-icon>delete</mat-icon></button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card add-employee">
+  <h5 class="card-header">Adicionar/Atualizar Empregado</h5>
+  <div class="card-body">
+    <form id="add-form" (ngSubmit)="f.form.valid && saveEmployee(f)" #f="ngForm" novalidate>
+      <!-- Campo first_name -->
+      <div class="form-group">
+        <label for="first_name">Nome</label>
+        <input type="text" [(ngModel)]="employee.first_name" id="first_name" name="first_name"
+          #first_name="ngModel" required class="form-control"
+          [ngClass]="{ 'is-invalid': f.submitted && first_name.invalid }"
+          placeholder="Digite o Nome">
+        <div *ngIf="f.submitted && first_name.invalid" class="invalid-feedback">
+          <div *ngIf="first_name.errors.required">O Nome é obrigatório</div>
+        </div>
+      </div>
+      <!-- ***************************************************************** -->
+      <!-- Campo last_name -->
+      <div class="form-group">
+        <label for="last_name">Sobrenome</label>
+        <input type="text" [(ngModel)]="employee.last_name" id="last_name" name="last_name"
+          #last_name="ngModel" required class="form-control"
+          [ngClass]="{ 'is-invalid': f.submitted && last_name.invalid }" placeholder="Digite o Sobrenome">
+        <div *ngIf="f.submitted && last_name.invalid" class="invalid-feedback">
+          <div *ngIf="last_name.errors.required">O Sobrenome é obrigatório</div>
+        </div>
+      </div>
+      <!-- ***************************************************************** -->
+      <!-- Campo email -->
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input type="text" [(ngModel)]="employee.email" id="email" name="email"
+          #email="ngModel" required class="form-control"
+          [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" placeholder="Digite o e-mail">
+        <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+          <div *ngIf="email.errors.required">O E-mail é obrigatório</div>
+        </div>
+      </div>
+      <!-- ***************************************************************** -->
+      <!-- Campo phone_number -->
+      <div class="form-group">
+        <label for="phone_number">Telefone</label>
+        <input type="text" [(ngModel)]="employee.phone_number" id="phone_number" name="phone_number"
+          #phone_number="ngModel" required class="form-control"
+          [ngClass]="{ 'is-invalid': f.submitted && phone_number.invalid }" placeholder="Digite o Telefone">
+        <div *ngIf="f.submitted && phone_number.invalid" class="invalid-feedback">
+          <div *ngIf="phone_number.errors.required">O nome do Departamento é obrigatório</div>
+        </div>
+      </div>
+      <!-- ***************************************************************** -->
+      <!-- Campo hire_date -->
+      <div class="form-group">
+        <label for="hire_date">Contratado em</label>
+        <input type="text" [(ngModel)]="employee.hire_date" id="hire_date" name="hire_date"
+          #hire_date="ngModel" required class="form-control"
+          [ngClass]="{ 'is-invalid': f.submitted && hire_date.invalid }" placeholder="Data">
+        <div *ngIf="f.submitted && hire_date.invalid" class="invalid-feedback">
+          <div *ngIf="hire_date.errors.required">A data de contratação é obrigatória</div>
+        </div>
+      </div>
+      <!-- ***************************************************************** -->
+      <!-- Campo salary -->
+      <div class="form-group">
+        <label for="salary">Salário</label>
+        <input type="text" [(ngModel)]="employee.salary" id="salary" name="salary"
+          #salary="ngModel" required class="form-control"
+          [ngClass]="{ 'is-invalid': f.submitted && salary.invalid }" placeholder="Digite o Salário">
+        <div *ngIf="f.submitted && salary.invalid" class="invalid-feedback">
+          <div *ngIf="salary.errors.required">O Salário é obrigatório</div>
+        </div>
+      </div>
+      <!-- ***************************************************************** -->
+      <!-- Campo commission_pct -->
+      <div class="form-group">
+        <label for="commission_pct">Comissão %</label>
+        <input type="text" [(ngModel)]="employee.commission_pct" id="commission_pct" name="commission_pct"
+          #commission_pct="ngModel" required class="form-control"
+          [ngClass]="{ 'is-invalid': f.submitted && commission_pct.invalid }" placeholder="0.00">
+        <div *ngIf="f.submitted && commission_pct.invalid" class="invalid-feedback">
+          <div *ngIf="commission_pct.errors.required">A Comissão % é obrigatória</div>
+        </div>
+      </div>
+      <!-- ***************************************************************** -->
+      <!-- Campo  manager_id -->
+      <div class="form-group">
+        <label for="manager_id">ID do Gerente</label>
+        <input type="number" [(ngModel)]="employee.manager_id" id="manager_id" name="manager_id" #manager_id="ngModel"
+          required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && manager_id.invalid }"
+          placeholder="Digite o ID">
+        <div *ngIf="f.submitted && manager_id.invalid" class="invalid-feedback">
+          <div *ngIf="manager_id.errors.required">O ID do Gerente é obrigatório</div>
+        </div>
+      </div>
+      <!-- Campo department_id -->
+      <div class="form-group">
+        <label for="department_id">Departamento</label>
+        <input type="text" [(ngModel)]="employee.department_id" id="department_id" name="department_id"
+          #department_id="ngModel" required class="form-control"
+          [ngClass]="{ 'is-invalid': f.submitted && department_id.invalid }" placeholder="Digite o nome do Departamento">
+        <div *ngIf="f.submitted && department_id.invalid" class="invalid-feedback">
+          <div *ngIf="department_id.errors.required">O nome do Departamento é obrigatório</div>
+        </div>
+      </div>
+      <!-- ***************************************************************** -->
+      <!-- Campo job_id -->
+      <div class="form-group">
+        <label for="job_id">Função</label>
+        <input type="text" [(ngModel)]="employee.job_id" id="job_id" name="job_id"
+          #job_id="ngModel" required class="form-control"
+          [ngClass]="{ 'is-invalid': f.submitted && job_id.invalid }" placeholder="Digite a Função">
+        <div *ngIf="f.submitted && job_id.invalid" class="invalid-feedback">
+          <div *ngIf="job_id.errors.required">O nome do Departamento é obrigatório</div>
+        </div>
+      </div>
+      <!-- ***************************************************************** -->
+      <button type="submit" class="btn btn-primary btn-add-employee">Salvar</button>
+      <button type="reset" class="btn btn-secondary btn-add-employee" (click)="cleanForm(f)">Cancelar</button>
+    </form>
+  </div>
+</div>

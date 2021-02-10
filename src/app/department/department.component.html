@@ -1,0 +1,55 @@
+<div class="card list-department">
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Departamento</th>
+          <th scope="col">ID do Gerente</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let department of departments">
+          <td>{{department.department_id}}</td>
+          <td>{{department.department_name}}</td>
+          <td>{{department.manager_id}}</td>
+          <td>
+            <button type="button" class="btn btn-warning btn-sm" (click)="editDepartment(department)"><mat-icon>edit</mat-icon></button>
+            <button type="button" class="btn btn-danger btn-sm ml-1"
+              (click)="deleteDepartment(department)"><mat-icon>delete</mat-icon></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card add-department">
+  <h5 class="card-header">Adicionar/Atualizar departmento</h5>
+  <div class="card-body">
+    <form id="add-form" (ngSubmit)="f.form.valid && saveDepartment(f)" #f="ngForm" novalidate>
+      <div class="form-group">
+        <label for="department_name">Departamento</label>
+        <input type="text" [(ngModel)]="department.department_name" id="department_name" name="department_name"
+          #department_name="ngModel" required class="form-control"
+          [ngClass]="{ 'is-invalid': f.submitted && department_name.invalid }"
+          placeholder="Digite o nome do Departamento">
+        <div *ngIf="f.submitted && department_name.invalid" class="invalid-feedback">
+          <div *ngIf="department_name.errors.required">O nome do Departamento é obrigatório</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="manager_id">ID do Gerente</label>
+        <input type="number" [(ngModel)]="department.manager_id" id="manager_id" name="manager_id" #manager_id="ngModel"
+          required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && manager_id.invalid }"
+          placeholder="Digite o ID">
+        <div *ngIf="f.submitted && manager_id.invalid" class="invalid-feedback">
+          <div *ngIf="manager_id.errors.required">O ID do Gerente é obrigatório</div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-add-department">Salvar</button>
+      <button type="reset" class="btn btn-secondary btn-add-department" (click)="cleanForm(f)">Cancelar</button>
+    </form>
+  </div>
+</div>

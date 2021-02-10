@@ -1,0 +1,113 @@
+<div class="card list-job-history">
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ID Histórico</th>
+          <th scope="col">Data Inicio</th>
+          <th scope="col">Data Fim</th>
+          <th scope="col">Função</th>
+          <th scope="col">ID Func.</th>
+          <th scope="col">Dep.</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let job_history of job_historys">
+          <td>{{job_history.job_history_id}}</td>
+          <td>{{job_history.start_date}}</td>
+          <td>{{job_history.end_date}}</td>
+          <td>{{job_history.job_id}}</td>
+          <td>{{job_history.employee_id}}</td>
+          <td>{{job_history.department_id}}</td>
+          <td>
+            <div class="actions-btn">
+              <button type="button" class="btn btn-warning btn-sm" (click)="editJobHistory(job_history)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button type="button" class="btn btn-danger btn-sm ml-1" (click)="deleteJobHistory(job_history)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card add-job-history">
+  <h5 class="card-header">Adicionar/Atualizar Registro</h5>
+  <div class="card-body">
+    <form id="add-form" (ngSubmit)="f.form.valid && saveJobHistory(f)" #f="ngForm" novalidate>
+      <!-- Campo job_history_id -->
+      <div class="form-group">
+        <label for="job_history_id">Empregado</label>
+        <input type="text" [(ngModel)]="job_history.job_history_id" id="job_history_id" name="job_history_id" #job_history_id="ngModel" required
+          class="form-control" [ngClass]="{ 'is-invalid': f.submitted && job_history_id.invalid }"
+          placeholder="Digite o nome do Departamento">
+        <div *ngIf="f.submitted && job_history_id.invalid" class="invalid-feedback">
+          <div *ngIf="job_history_id.errors.required">O nome do Departamento é obrigatório</div>
+        </div>
+      </div>
+      <!-- ***************************************************************** -->
+      <!-- Campo start_date -->
+      <div class="form-group">
+        <label for="start_date">Data Inicio</label>
+        <input type="text" [(ngModel)]="job_history.start_date" id="start_date" name="start_date" #start_date="ngModel" required
+          class="form-control" [ngClass]="{ 'is-invalid': f.submitted && start_date.invalid }"
+          placeholder="Digite a data de início">
+        <div *ngIf="f.submitted && start_date.invalid" class="invalid-feedback">
+          <div *ngIf="start_date.errors.required">O E-mail é obrigatório</div>
+        </div>
+      </div>
+      <!-- ***************************************************************** -->
+      <!-- Campo end_date -->
+      <div class="form-group">
+        <label for="end_date">Data Fim</label>
+        <input type="text" [(ngModel)]="job_history.end_date" id="end_date" name="end_date"
+          #end_date="ngModel" required class="form-control"
+          [ngClass]="{ 'is-invalid': f.submitted && end_date.invalid }" placeholder="Digite a data Fim">
+        <div *ngIf="f.submitted && end_date.invalid" class="invalid-feedback">
+          <div *ngIf="end_date.errors.required">A Data Fim é obrigatória</div>
+        </div>
+      </div>
+      <!-- ***************************************************************** -->
+      <!-- Campo department_id -->
+      <div class="form-group">
+        <label for="department_id">Departamento</label>
+        <input type="text" [(ngModel)]="job_history.department_id" id="department_id" name="department_id"
+          #department_id="ngModel" required class="form-control"
+          [ngClass]="{ 'is-invalid': f.submitted && department_id.invalid }" placeholder="Digite o nome do Departamento">
+        <div *ngIf="f.submitted && department_id.invalid" class="invalid-feedback">
+          <div *ngIf="department_id.errors.required">O nome do Departamento é obrigatório</div>
+        </div>
+      </div>
+      <!-- ***************************************************************** -->
+      <!-- Campo employee_id -->
+      <div class="form-group">
+        <label for="employee_id">Contratado em</label>
+        <input type="text" [(ngModel)]="job_history.employee_id" id="employee_id" name="employee_id" #employee_id="ngModel"
+          required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && employee_id.invalid }"
+          placeholder="Digite o nome do Departamento">
+        <div *ngIf="f.submitted && employee_id.invalid" class="invalid-feedback">
+          <div *ngIf="employee_id.errors.required">A data de contratação é obrigatória</div>
+        </div>
+      </div>
+      <!-- ***************************************************************** -->
+      <!-- Campo job_id -->
+      <div class="form-group">
+        <label for="job_id">Empregado</label>
+        <input type="text" [(ngModel)]="job_history.job_id" id="job_id" name="job_id" #job_id="ngModel" required
+          class="form-control" [ngClass]="{ 'is-invalid': f.submitted && job_id.invalid }"
+          placeholder="Digite o nome do Departamento">
+        <div *ngIf="f.submitted && job_id.invalid" class="invalid-feedback">
+          <div *ngIf="job_id.errors.required">O nome do Departamento é obrigatório</div>
+        </div>
+      </div>
+      <!-- ***************************************************************** -->
+      <button type="submit" class="btn btn-primary btn-add-job-history">Salvar</button>
+      <button type="reset" class="btn btn-secondary btn-add-job-history" (click)="cleanForm(f)">Cancelar</button>
+    </form>
+  </div>
+</div>

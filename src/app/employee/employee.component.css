@@ -1,0 +1,24 @@
+.container {
+  margin-top: 30px;
+}
+
+.add-employee {
+  margin-bottom: 30px;
+}
+
+.list-employee {
+  margin-bottom: 50px;
+}
+
+.btn-add-employee {
+  margin-right: 10px;
+}
+
+.btn-sm {
+  height: 3em;
+  width: 3em;
+}
+.actions-btn {
+  width: 90px;
+  display: inline-block;
+}
