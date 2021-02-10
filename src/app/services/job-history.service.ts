@@ -9,7 +9,7 @@ import { JobHistory } from './../models/job-history';
   providedIn: 'root'
 })
 export class JobHistoryService {
-  url = 'http://api.local:8000/api'+'/job-history';
+  url = process.env.API_URL + '/job-history';
 
   constructor(private httpClient: HttpClient) { }
 

@@ -9,7 +9,7 @@ import { Job } from './../models/job';
   providedIn: 'root'
 })
 export class JobService {
-  url = 'http://api.local:8000/api'+'/jobs';
+  url = process.env.API_URL + '/jobs';
 
   constructor(private httpClient: HttpClient) { }
 

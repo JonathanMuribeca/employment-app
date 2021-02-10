@@ -9,7 +9,7 @@ import { Department } from './../models/department';
   providedIn: 'root'
 })
 export class DepartmentService {
-  url = 'http://api.local:8000/api'+'/departments';
+  url = process.env.API_URL + '/departments';
 
   constructor(private httpClient: HttpClient) { }
 
