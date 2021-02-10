@@ -3,13 +3,13 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpClientModule } from '@a
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { JobHistory } from './../models/job-history';
-
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JobHistoryService {
-  url = process.env.API_URL + '/job-history';
+  url = environment.apiUrl + '/job-history';
 
   constructor(private httpClient: HttpClient) { }
 

@@ -3,13 +3,13 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpClientModule } from '@a
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { Job } from './../models/job';
-
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JobService {
-  url = process.env.API_URL + '/jobs';
+  url = environment.apiUrl + '/jobs';
 
   constructor(private httpClient: HttpClient) { }
 
